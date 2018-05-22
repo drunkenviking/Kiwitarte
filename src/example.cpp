@@ -162,16 +162,15 @@ int32_t main(int32_t argc, char **argv) {
         }
 
 
-
+/*
   cv::String test ("grmid2.jpg");
-  cv::Mat imgOriginal =cv::imread(test);    // Input image
-  
+  cv::Mat scaledImage =cv::imread(test);  */  // Input image
+
   cv::Mat hsvImg;       // HSV Image
   cv::Mat threshImg;      // Thresh Image
 
   std::vector<cv::Vec3f> v3fCircles;    // 3 element vector of floats, this will be the pass by reference output of HoughCircles()
-
-  char charCheckForEscKey = 0; 
+/*  char charCheckForEscKey = 0; */
 
    int lowH = 35;             // Set Hue
   int highH = 70;
@@ -188,14 +187,14 @@ int32_t main(int32_t argc, char **argv) {
   // Adjust Saturation and Value depending on the lighting condition of the environment as well as the surface of the object.
 
   /* while (charCheckForEscKey != 27 && capWebcam.isOpened()) {       // until the Esc is pressed or webcam connection is lost
-    bool blnFrameReadSuccessfully = capWebcam.read(imgOriginal);    // get next frame
+    bool blnFrameReadSuccessfully = capWebcam.read(scaledImage);    // get next frame
 
-    if (!blnFrameReadSuccessfully || imgOriginal.empty()) {       // if frame read unsuccessfully
+    if (!blnFrameReadSuccessfully || scaledImage.empty()) {       // if frame read unsuccessfully
       std::cout << "error: frame can't read \n";            // print error message
       break;                              // jump out of loop
     }*/
 
-    cv::cvtColor(imgOriginal, hsvImg, CV_BGR2HSV);            // Convert Original Image to HSV Thresh Image
+    cv::cvtColor(scaledImage, hsvImg, CV_BGR2HSV);            // Convert Original Image to HSV Thresh Image
 
     cv::inRange(hsvImg, cv::Scalar(lowH, lowS, lowV), cv::Scalar(highH, highS, highV), threshImg);
 
@@ -206,20 +205,20 @@ int32_t main(int32_t argc, char **argv) {
     // fill circles vector with all circles in processed image
     cv::HoughCircles(threshImg,v3fCircles,CV_HOUGH_GRADIENT,2,threshImg.rows / 4,100,50,10,800);  // algorithm for detecting circles    
 
-    for (int i = 0; i < v3fCircles.size(); i++) {           // for each circle
+    for (int n = 0; n < v3fCircles.size(); n++) {           // for each circle
                               
-      std::cout << "Ball position X = "<< v3fCircles[i][0]      // x position of center point of circle
-        <<",\tY = "<< v3fCircles[i][1]                // y position of center point of circle
-        <<",\tRadius = "<< v3fCircles[i][2]<< "\n";         // radius of circle
+      std::cout << "Ball position X = "<< v3fCircles[n][0]      // x position of center point of circle
+        <<",\tY = "<< v3fCircles[n][1]                // y position of center point of circle
+        <<",\tRadius = "<< v3fCircles[n][2]<< "\n";         // radius of circle
 }
-end
+
 
 
 
 
         // Make an estimation.
-        float estimatedDetectionAngle = 0.0f;
-        float estimatedDetectionDistance = 0.0f;
+        float estimatedDetectionAngle = 0.01f;
+        float estimatedDetectionDistance = 0.01f;
 
        // Calculation Angle Distance
 
