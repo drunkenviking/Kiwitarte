@@ -205,7 +205,7 @@ int32_t main(int32_t argc, char **argv) {
     // fill circles vector with all circles in processed image
     cv::HoughCircles(threshImg,v3fCircles,CV_HOUGH_GRADIENT,2,threshImg.rows / 4,100,50,10,800);  // algorithm for detecting circles    
 
-    for (int n = 0; n < v3fCircles.size(); n++) {           // for each circle
+    for (uint n = 0; n < v3fCircles.size(); n++) {           // for each circle
                               
       std::cout << "Ball position X = "<< v3fCircles[n][0]      // x position of center point of circle
         <<",\tY = "<< v3fCircles[n][1]                // y position of center point of circle
