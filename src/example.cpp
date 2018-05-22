@@ -230,6 +230,12 @@ int32_t main(int32_t argc, char **argv) {
           i++;
           std::this_thread::sleep_for(std::chrono::seconds(1));
           std::cout << "The target was found at angle " << estimatedDetectionAngle 
+            
+            << "Ball position X = "<< v3fCircles[n][0]      // x position of center point of circle
+        <<",\tY = "<< v3fCircles[n][1]                // y position of center point of circle
+        <<",\tRadius = "<< v3fCircles[n][2]<< "\n"
+            
+            
             << " at distance " << estimatedDetectionDistance << std::endl;
         }
 
