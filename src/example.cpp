@@ -249,7 +249,10 @@ int32_t main(int32_t argc, char **argv) {
         <<",\tY = "<< v3fCircles[n][1]                // y position of center point of circle
         <<",\tRadius = "<< v3fCircles[n][2] << std::endl;       // radius of circle
 }
-      }
+          
+          
+          std::cout << "numbercircles " << v3fCircles.size() << std::endl;
+        }
         
 
         // In the end, send a message that is received by the control logic.
