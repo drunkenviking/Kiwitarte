@@ -219,13 +219,12 @@ int32_t main(int32_t argc, char **argv) {
 */
 
 
+	float x;
+	float y;
+	float r;
+	float z;
+	float angle;
 
-
-        // Make an estimation.
-        float estimatedDetectionAngle = 0.01f;
-        float estimatedDetectionDistance = 0.01f;
-
-       // Calculation Angle Distance
 
 
 
@@ -248,11 +247,11 @@ int32_t main(int32_t argc, char **argv) {
             << " at distance " << estimatedDetectionDistance << std::endl;
         }
         */
-  float x = v3fCircles[0][0];
-	float y = v3fCircles[0][1];
-	float r = v3fCircles[0][2];
-	float z = 250000/r;
-	float angle = atan((128-x)/z)*180/PI;
+        x = v3fCircles[0][0];
+	y = v3fCircles[0][1];
+	r = v3fCircles[0][2];
+	z = 250000/r;
+	angle = (float)atan((128-x)/z)*180/PI;
           
           
           std::cout << "numbercircles " << v3fCircles.size() << " x = " << x << " radius = " << r << " Distance = " << z << " Angle = " << angle << std::endl;
