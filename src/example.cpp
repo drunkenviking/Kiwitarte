@@ -88,81 +88,11 @@ int32_t main(int32_t argc, char **argv) {
       image->imageData = sharedMemory->data();
       image->imageDataOrigin = image->imageData;
       sharedMemory->unlock();
-
-
-      // TINYDNN EXAMPLE: https://github.com/tiny-dnn/tiny-dnn/blob/master/examples/sinus_fit/sinus_fit.cpp
-
-     /* if (TRAINCNN) {
-        tiny_dnn::network<tiny_dnn::sequential> net;
-        net << tiny_dnn::fully_connected_layer(1, 10);
-        net << tiny_dnn::tanh_layer();
-        net << tiny_dnn::fully_connected_layer(10, 10);
-        net << tiny_dnn::tanh_layer();
-        net << tiny_dnn::fully_connected_layer(10, 1);
-
-        // create input and desired output on a period
-        std::vector<tiny_dnn::vec_t> X;
-        std::vector<tiny_dnn::vec_t> sinusX;
-        for (float x = -3.1416f; x < 3.1416f; x += 0.2f) {
-          tiny_dnn::vec_t vx    = {x};
-          tiny_dnn::vec_t vsinx = {sinf(x)};
-
-          X.push_back(vx);
-          sinusX.push_back(vsinx);
-        }
-
-        // set learning parameters
-        size_t batch_size = 16;    // 16 samples for each network weight update
-        int epochs        = 2000;  // 2000 presentation of all samples
-        tiny_dnn::adamax opt;
-
-        // this lambda function will be called after each epoch
-        int iEpoch              = 0;
-        auto on_enumerate_epoch = [&]() {
-          // compute loss and disp 1/100 of the time
-          iEpoch++;
-          if (iEpoch % 100) return;
-
-          double loss = net.get_loss<tiny_dnn::mse>(X, sinusX);
-          std::cout << "epoch=" << iEpoch << "/" << epochs << " loss=" << loss
-                    << std::endl;
-        };
-
-        // learn
-        std::cout << "learning the sinus function with 2000 epochs:" << std::endl;
-        net.fit<tiny_dnn::mse>(opt, X, sinusX, batch_size, epochs, []() {},
-                               on_enumerate_epoch);
-
-        std::cout << std::endl
-                  << "Training finished, now computing prediction results:"
-                  << std::endl;
-        net.save("net");
-
-
-      }
-      tiny_dnn::network<tiny_dnn::sequential> net2;
-      net2.load("net");
-      // compare prediction and desired output
-      float fMaxError = 0.f;
-      for (float x = -3.1416f; x < 3.1416f; x += 0.2f) {
-        tiny_dnn::vec_t xv = {x};
-        float fPredicted   = net2.predict(xv)[0];
-        float fDesired     = sinf(x);
-
-        std::cout << "x=" << x << " sinX=" << fDesired
-                  << " predicted=" << fPredicted << std::endl;
-
-        // update max error
-        float fError = std::fabs(fPredicted - fDesired);
-
-        if (fMaxError < fError) fMaxError = fError;
-      }
-
-      std::cout << std::endl << "max_error=" << fMaxError << std::endl;
-
-*/
-
       int32_t i = 0;
+      float previous_x = 0.0f;
+      float previous_z = 0.5f;
+      float previous_angle = 0.0f;
+	    
       while (od4.isRunning()) {
         sharedMemory->wait();
 
@@ -219,11 +149,11 @@ int32_t main(int32_t argc, char **argv) {
 */
 
 
-	float x = 1.0f;
+	float x;
 	/* float y;*/
-	float r = 1.0f;
-	float z = 1.0f;
-	float angle = 1.0f;
+	float r;
+	float z;
+	float angle;
 	
 
 
@@ -234,12 +164,22 @@ int32_t main(int32_t argc, char **argv) {
           cv::imwrite(FILENAME, scaledImage);
           i++;
           std::this_thread::sleep_for(std::chrono::seconds(1));
-     
-        x = v3fCircles[0][0];
-	/* y = v3fCircles[0][1];*/
-	r = v3fCircles[0][2];
-	z = 250000/r;
-	angle = (float)(atan((128-x)/z)*180/3.14159265);
+        if(v3fCircles.size()==1){
+		x = v3fCircles[0][0];
+		previous_x = x;
+	        r = v3fCircles[0][2];
+	        z = 250000/r;
+		previous_z = z;
+	        angle = (float)(atan((128-x)/z)*180/3.14159265);
+		previous_angle = angle;
+		
+	}else{
+		x = previous_x;
+		z = previous_z;
+                angle = previous_angle;
+		std::cout << "No circle is detected" << std::endl;
+	}
+        
          
           
           std::cout << "numbercircles " << v3fCircles.size() << " x = " << x << " radius = " << r << " Distance = " << z << " Angle = " << angle << std::endl;
