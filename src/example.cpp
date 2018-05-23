@@ -253,7 +253,7 @@ int32_t main(int32_t argc, char **argv) {
 	/* y = v3fCircles[0][1];*/
 	r = v3fCircles[0][2];
 	z = 250000/r;
-	angle = (float)atan((128-x)/z)*180/3.14159265;
+	angle = (float)(atan((128-x)/z)*180/3.14159265);
          
           
           std::cout << "numbercircles " << v3fCircles.size() << " x = " << x << " radius = " << r << " Distance = " << z << " Angle = " << angle << std::endl;
