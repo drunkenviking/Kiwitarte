@@ -21,7 +21,7 @@
 #include <sstream>
 #include <string>
 #include <thread>
-
+#define PI 3.14159265
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
@@ -55,7 +55,23 @@ int32_t main(int32_t argc, char **argv) {
     uint32_t const HEIGHT{960};
     uint32_t const BPP{24};
     uint32_t const ID{(commandlineArguments["id"].size() != 0) ? static_cast<uint32_t>(std::stoi(commandlineArguments["id"])) : 0};
+    
+  /*int lowH = 35;             // Set Hue
+  int highH = 70;
 
+  int lowS = 50;              // Set Saturation 50 155
+  int highS = 155;
+
+  int lowV = 40;              // Set Value 45 150
+  int highV = 160; */
+    
+    int const lowH = std::stof(commandlineArguments["lowH"]);
+    int const highH = std::stof(commandlineArguments["highH"]);
+    int const lowS = std::stof(commandlineArguments["lowS"]);
+    int const highS = std::stof(commandlineArguments["highS"]);
+    int const lowV = std::stof(commandlineArguments["lowV"]);
+    int const highV = std::stof(commandlineArguments["highV"]);
+    
     std::string const NAME{(commandlineArguments["name"].size() != 0) ? commandlineArguments["name"] : "/cam0"};
     cluon::OD4Session od4{static_cast<uint16_t>(std::stoi(commandlineArguments["cid"]))};
 
@@ -171,18 +187,7 @@ int32_t main(int32_t argc, char **argv) {
 
   std::vector<cv::Vec3f> v3fCircles;    // 3 element vector of floats, this will be the pass by reference output of HoughCircles()
 /*  char charCheckForEscKey = 0; */
-
-   int lowH = 35;             // Set Hue
-  int highH = 70;
-
-  int lowS = 50;              // Set Saturation 50 155
-  int highS = 155;
-
-  int lowV = 40;              // Set Value 45 150
-  int highV = 160; 
-
-
-
+        
   // HUE for YELLOW is 21-30.
   // Adjust Saturation and Value depending on the lighting condition of the environment as well as the surface of the object.
 
@@ -243,22 +248,21 @@ int32_t main(int32_t argc, char **argv) {
             << " at distance " << estimatedDetectionDistance << std::endl;
         }
         */
-        for (uint n = 0; n < v3fCircles.size(); n++) {           // for each circle
-                              
-      std::cout << "Ball position X = "<< v3fCircles[n][0]      // x position of center point of circle
-        <<",\tY = "<< v3fCircles[n][1]                // y position of center point of circle
-        <<",\tRadius = "<< v3fCircles[n][2] << std::endl;       // radius of circle
-}
+  float x = v3fCircles[0][0];
+	float y = v3fCircles[0][1];
+	float r = v3fCircles[0][2];
+	float z = 250000/r;
+	float angle = atan((128-x)/z)*180/PI;
           
           
-          std::cout << "numbercircles " << v3fCircles.size() << std::endl;
+          std::cout << "numbercircles " << v3fCircles.size() << " x = " << x << " radius = " << r << " Distance = " << z << " Angle = " << angle << std::endl;
         }
         
 
         // In the end, send a message that is received by the control logic.
         opendlv::logic::sensation::Point detection;
-        detection.azimuthAngle(estimatedDetectionAngle);
-        detection.distance(estimatedDetectionDistance);
+        detection.azimuthAngle(angle);
+        detection.distance(z);
 
         od4.send(detection, cluon::time::now(), ID);
       }
