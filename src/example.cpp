@@ -65,12 +65,12 @@ int32_t main(int32_t argc, char **argv) {
   int lowV = 40;              // Set Value 45 150
   int highV = 160; */
     
-    int const lowH = std::stof(commandlineArguments["lowH"]);
-    int const highH = std::stof(commandlineArguments["highH"]);
-    int const lowS = std::stof(commandlineArguments["lowS"]);
-    int const highS = std::stof(commandlineArguments["highS"]);
-    int const lowV = std::stof(commandlineArguments["lowV"]);
-    int const highV = std::stof(commandlineArguments["highV"]);
+    int const lowH = std::stoi(commandlineArguments["lowH"]);
+    int const highH = std::stoi(commandlineArguments["highH"]);
+    int const lowS = std::stoi(commandlineArguments["lowS"]);
+    int const highS = std::stoi(commandlineArguments["highS"]);
+    int const lowV = std::stoi(commandlineArguments["lowV"]);
+    int const highV = std::stoi(commandlineArguments["highV"]);
     
     std::string const NAME{(commandlineArguments["name"].size() != 0) ? commandlineArguments["name"] : "/cam0"};
     cluon::OD4Session od4{static_cast<uint16_t>(std::stoi(commandlineArguments["cid"]))};
