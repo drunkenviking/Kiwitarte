@@ -229,7 +229,7 @@ int32_t main(int32_t argc, char **argv) {
           cv::imwrite(FILENAME, scaledImage);
           i++;
           std::this_thread::sleep_for(std::chrono::seconds(1));
-          std::cout << "The target was found at angle " << estimatedDetectionAngle 
+     /*     std::cout << "The target was found at angle " << estimatedDetectionAngle 
             
             /*
             
@@ -242,13 +242,14 @@ int32_t main(int32_t argc, char **argv) {
             
             << " at distance " << estimatedDetectionDistance << std::endl;
         }
-        
+        */
         for (uint n = 0; n < v3fCircles.size(); n++) {           // for each circle
                               
       std::cout << "Ball position X = "<< v3fCircles[n][0]      // x position of center point of circle
         <<",\tY = "<< v3fCircles[n][1]                // y position of center point of circle
         <<",\tRadius = "<< v3fCircles[n][2]<< "\n"  std::endl;       // radius of circle
 }
+      }
         
 
         // In the end, send a message that is received by the control logic.
