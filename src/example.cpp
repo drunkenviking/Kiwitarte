@@ -50,7 +50,6 @@ int32_t main(int32_t argc, char **argv) {
     std::cerr << "Example: " << argv[0] << " --cid=111 --name=cam0 --traincnn=1" << std::endl;
     retCode = 1;
   } else {
-    bool const VERBOSE{commandlineArguments.count("verbose") != 0};
    /* bool const TRAINCNN{std::stoi(commandlineArguments["cid"]) == 1};*/
     uint32_t const WIDTH{1280};
     uint32_t const HEIGHT{960};
@@ -220,35 +219,22 @@ int32_t main(int32_t argc, char **argv) {
 */
 
 
-	float x;
+	float x = 1.0f;
 	/* float y;*/
-	float r;
-	float z;
-	float angle;
+	float r = 1.0f;
+	float z = 1.0f;
+	float angle = 1.0f;
 	
 
 
 
 
-        if (VERBOSE) {
+       
           std::string const FILENAME = std::to_string(i) + ".jpg";
           cv::imwrite(FILENAME, scaledImage);
           i++;
           std::this_thread::sleep_for(std::chrono::seconds(1));
-     /*     std::cout << "The target was found at angle " << estimatedDetectionAngle 
-            
-            
-            
-            << "Ball position X = "<< v3fCircles[0][0]      // x position of center point of circle
-        <<",\tY = "<< v3fCircles[0][1]                // y position of center point of circle
-        <<",\tRadius = "<< v3fCircles[0][2]<< "\0"
-            
-            
-            
-            
-            << " at distance " << estimatedDetectionDistance << std::endl;
-        }
-        */
+     
         x = v3fCircles[0][0];
 	/* y = v3fCircles[0][1];*/
 	r = v3fCircles[0][2];
@@ -257,7 +243,7 @@ int32_t main(int32_t argc, char **argv) {
          
           
           std::cout << "numbercircles " << v3fCircles.size() << " x = " << x << " radius = " << r << " Distance = " << z << " Angle = " << angle << std::endl;
-        }
+        
         
 
         // In the end, send a message that is received by the control logic.
