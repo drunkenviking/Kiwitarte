@@ -205,13 +205,13 @@ int32_t main(int32_t argc, char **argv) {
     // fill circles vector with all circles in processed image
     cv::HoughCircles(threshImg,v3fCircles,CV_HOUGH_GRADIENT,2,threshImg.rows / 4,100,50,10,800);  // algorithm for detecting circles    
 
-    for (uint n = 0; n < v3fCircles.size(); n++) {           // for each circle
+   /* for (uint n = 0; n < v3fCircles.size(); n++) {           // for each circle
                               
       std::cout << "Ball position X = "<< v3fCircles[n][0]      // x position of center point of circle
         <<",\tY = "<< v3fCircles[n][1]                // y position of center point of circle
         <<",\tRadius = "<< v3fCircles[n][2]<< "\n";         // radius of circle
 }
-
+*/
 
 
 
@@ -231,13 +231,25 @@ int32_t main(int32_t argc, char **argv) {
           std::this_thread::sleep_for(std::chrono::seconds(1));
           std::cout << "The target was found at angle " << estimatedDetectionAngle 
             
+            /*
+            
             << "Ball position X = "<< v3fCircles[0][0]      // x position of center point of circle
         <<",\tY = "<< v3fCircles[0][1]                // y position of center point of circle
         <<",\tRadius = "<< v3fCircles[0][2]<< "\0"
+            */
+            
             
             
             << " at distance " << estimatedDetectionDistance << std::endl;
         }
+        
+        for (uint n = 0; n < v3fCircles.size(); n++) {           // for each circle
+                              
+      std::cout << "Ball position X = "<< v3fCircles[n][0]      // x position of center point of circle
+        <<",\tY = "<< v3fCircles[n][1]                // y position of center point of circle
+        <<",\tRadius = "<< v3fCircles[n][2]<< "\n"  std::endl;       // radius of circle
+}
+        
 
         // In the end, send a message that is received by the control logic.
         opendlv::logic::sensation::Point detection;
