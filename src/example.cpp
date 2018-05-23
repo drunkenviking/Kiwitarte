@@ -21,7 +21,8 @@
 #include <sstream>
 #include <string>
 #include <thread>
-#define PI 3.14159265
+
+
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
@@ -220,10 +221,11 @@ int32_t main(int32_t argc, char **argv) {
 
 
 	float x;
-	float y;
+	/* float y;*/
 	float r;
 	float z;
 	float angle;
+	
 
 
 
@@ -248,11 +250,11 @@ int32_t main(int32_t argc, char **argv) {
         }
         */
         x = v3fCircles[0][0];
-	y = v3fCircles[0][1];
+	/* y = v3fCircles[0][1];*/
 	r = v3fCircles[0][2];
 	z = 250000/r;
-	angle = (float)atan((128-x)/z)*180/PI;
-          
+	angle = (float)atan((128-x)/z)*180/3.14159265;
+         
           
           std::cout << "numbercircles " << v3fCircles.size() << " x = " << x << " radius = " << r << " Distance = " << z << " Angle = " << angle << std::endl;
         }
