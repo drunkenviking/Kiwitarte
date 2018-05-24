@@ -56,21 +56,21 @@ int32_t main(int32_t argc, char **argv) {
     uint32_t const BPP{24};
     uint32_t const ID{(commandlineArguments["id"].size() != 0) ? static_cast<uint32_t>(std::stoi(commandlineArguments["id"])) : 0};
     
-  /*int lowH = 35;             // Set Hue
+  int lowH = 35;             // Set Hue
   int highH = 70;
 
   int lowS = 50;              // Set Saturation 50 155
   int highS = 155;
 
   int lowV = 40;              // Set Value 45 150
-  int highV = 160; */
+  int highV = 160;
     
-    int const lowH = std::stoi(commandlineArguments["lowH"]);
+    /*int const lowH = std::stoi(commandlineArguments["lowH"]);
     int const highH = std::stoi(commandlineArguments["highH"]);
     int const lowS = std::stoi(commandlineArguments["lowS"]);
     int const highS = std::stoi(commandlineArguments["highS"]);
     int const lowV = std::stoi(commandlineArguments["lowV"]);
-    int const highV = std::stoi(commandlineArguments["highV"]);
+    int const highV = std::stoi(commandlineArguments["highV"]);*/
     
     std::string const NAME{(commandlineArguments["name"].size() != 0) ? commandlineArguments["name"] : "/cam0"};
     cluon::OD4Session od4{static_cast<uint16_t>(std::stoi(commandlineArguments["cid"]))};
