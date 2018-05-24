@@ -33,11 +33,12 @@
 #include<opencv2/core/core.hpp>
 #include<opencv2/opencv.hpp>
 #include<cstdio>
+/*
 #include<chrono>
 #include<thread>
 
 std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-
+std::this_thread::sleep_for(std::chrono::seconds(3));*/
 /*#include "tiny_dnn/tiny_dnn.h"*/
 
 int32_t main(int32_t argc, char **argv) {
