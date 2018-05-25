@@ -92,7 +92,6 @@ int32_t main(int32_t argc, char **argv) {
       image->imageData = sharedMemory->data();
       image->imageDataOrigin = image->imageData;
       sharedMemory->unlock();
-      int32_t i = 0;
       float previous_x = 0.0f;
       float previous_z = 0.5f;
       float previous_angle = 0.0f;
