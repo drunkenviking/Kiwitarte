@@ -164,9 +164,9 @@ int32_t main(int32_t argc, char **argv) {
 
 
        
-          std::string const FILENAME = std::to_string(i) + ".jpg";
+         /* std::string const FILENAME = std::to_string(i) + ".jpg";
           cv::imwrite(FILENAME, scaledImage);
-          i++;
+          i++;*/
           std::this_thread::sleep_for(std::chrono::seconds(1));
         if(v3fCircles.size()==1){
 		x = v3fCircles[0][0];
